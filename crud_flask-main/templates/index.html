@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <div class="row">
+    <div class="col-md-5">
+      {% with messages = get_flashed_messages()  %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <div class="card card-body">
+        <form action="{{url_for('add_contact')}}" method="POST">
+          <div class="form-group">
+            <input type="text" class="form-control" name="Nombre" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="Unidad_medida" placeholder="Unidad_medida">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="Precio" placeholder="Precio">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="Stock" placeholder="Stock">
+          </div>
+          <button class="btn btn-primary btn-block">
+            Save 
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card card-body">
+        <form action="{{url_for('search')}}" method="POST">
+          <div class="form-group">
+            <input type="text" class="form-control" name="Nombre" placeholder="Nombre">
+          </div>
+          <button class="btn btn-primary btn-block">
+            Search 
+          </button>
+        </form>
+      </div>
+
+    <div class="col-md-7">
+      <table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>  NOMBRE</td>
+            <td>UNIDAD_MEDIDA</td>
+            <td>STOCK</td>
+            <td>PRECIO</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+          <tr>
+            <td>{{contact.0}}</td>
+            <td>{{contact.1}}</td>
+            <td>{{contact.2}}</td>
+            <td>{{contact.4}}</td>
+            <td>{{contact.3}}</td>
+            <td>
+              <a href="/edit/{{contact.0}}" class="btn btn-secondary">edit</a>
+              <a href="/delete/{{contact.0}}" class="btn btn-danger btn-delete">delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

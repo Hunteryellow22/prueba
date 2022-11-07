@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card card-body">
+        <form action="/update/{{contact.0}}" method="POST">
+        <div class="form-group">
+            <label> nombre</label>
+            <input type="text" value="{{contact.1}}" name="Nombre" class="form-control">
+          </div>
+          <div class="form-group">
+            <label> unidad_medida</label>
+            <input type="text" value="{{contact.2}}"name="Unidad_medida" class="form-control">
+          </div>
+          <div class="form-group">
+            <label> precio</label>
+            <input type="text" value="{{contact.3}}" name="Precio" class="form-control">
+          </div>
+          <div class="form-group">
+            <label> stock</label>
+            <input type="text" value="{{contact.4}}" name="Stock" class="form-control">
+          </div>         
+            <button type="submit" class="btn btn-primary btn-block">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
